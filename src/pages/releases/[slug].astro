@@ -1,14 +1,14 @@
 ---
-import { getCollection, render } from 'astro:content';
-import Layout from '../../layouts/PostLayout.astro';
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/PostLayout.astro";
 
 export async function getStaticPaths() {
-	const releases = await getCollection('releases');
+  const releases = await getCollection("releases");
 
-	return releases.map((release) => ({
-		params: { slug: release.id },
-		props: { release },
-	}));
+  return releases.map((release) => ({
+    params: { slug: release.id },
+    props: { release },
+  }));
 }
 
 const { release } = Astro.props;

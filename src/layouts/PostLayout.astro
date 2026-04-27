@@ -1,12 +1,14 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import FormattedDate from '../components/FormattedDate.astro';
-import Header from '../components/Header.astro';
+import "../styles/global.css"
+
+import type { CollectionEntry } from "astro:content";
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import FormattedDate from "../components/FormattedDate.astro";
+import Header from "../components/Header.astro";
 
 type Props = {
-	release: CollectionEntry<'releases'>;
+  release: CollectionEntry<"releases">;
 };
 
 const { release } = Astro.props;
@@ -21,19 +23,17 @@ const { release } = Astro.props;
 			image={release.data.image}
 		/>
 	</head><body>
-		<div class="glow"></div>
-		<Header />
-		<div class="post single" transition:persist transition:name="post">
+		<div >
 			<div class="version_wrapper">
 				<div class="version_info">
 					<div class="version_number">{release.data.versionNumber}</div>
 					<FormattedDate class="date" date={release.data.date} />
 				</div>
 			</div>
-			<div class="content">
+
+			<div class="content max-w-3xl mx-auto prose">
 				<slot />
 			</div>
 		</div>
-		<Footer />
 	</body>
 </html>

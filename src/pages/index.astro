@@ -3,19 +3,20 @@ import { getCollection, render } from 'astro:content';
 import FormattedDate from '../components/FormattedDate.astro';
 import Layout from '../layouts/IndexLayout.astro';
 
-const posts = await getCollection('releases');
+let posts = await getCollection('releases');
 posts.sort((a, b) => +b.data.date - +a.data.date);
+
+
+
 ---
 
 <Layout>
-	<main>
-		<h1 class="page_title">Changelog</h1>
-		<hr />
-		<ul class="posts" transition:name="post">
+	<main class='flex flex-col'>
+		<!-- ul class="posts mx-auto" transition:name="post">
 			{
 				posts.map((post) => (
 					<li class="post">
-						<div class="version_wrapper">
+						<div class="version_wrapper bg-surface-gray-6 text-ink-gray-1 p-2 w-fit p-">
 							<div class="version_info">
 								<a href={`/releases/${post.id}`}>
 									<div class="version_number">{post.data.versionNumber}</div>
@@ -23,7 +24,7 @@ posts.sort((a, b) => +b.data.date - +a.data.date);
 								</a>
 							</div>
 						</div>
-						<div class="content">
+						<div class="content prose">
 							{render(post).then(({ Content }) => (
 								<Content />
 							))}
@@ -31,6 +32,26 @@ posts.sort((a, b) => +b.data.date - +a.data.date);
 					</li>
 				))
 			}
-		</ul>
+		</ul -->
+
+    <!-- just links --> 
+
+    <div class='flex flex-col gap-5 max-w-3xl  mx-auto w-full py-10'>
+
+    {
+      posts.map((post) => (
+        <a href={`/releases/${post.id}`} class='justify-between flex'>
+          <span>           Version {post.data.versionNumber}
+            </span>
+
+            <span class='text-ink-gray-5'>
+           { new Date(post.data.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) }
+            </span>
+          </a>
+        ))
+    }
+
+    </div>
+
 	</main>
 </Layout>

@@ -1,7 +1,17 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
+import { urlToVidTag } from "./src/utils";
 
-// https://astro.build/config
+import tailwindcss from "@tailwindcss/vite";
+
 export default defineConfig({
-	site: 'https://example.com',
+  site: "https://example.com",
+
+  markdown: {
+    remarkPlugins: [urlToVidTag],
+  },
+
+  vite: {
+    plugins: [tailwindcss()],
+  },
 });
