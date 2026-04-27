@@ -14,7 +14,7 @@ const releases = defineCollection({
 			image: z.object({
 				src: image(),
 				alt: z.string(),
-			}),
+			}).optional(),
 			// Transform string to Date object
 			date: z.coerce.date(),
 		}),
