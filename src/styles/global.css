@@ -596,3 +596,7 @@ body {
   background-color: var(--surface-white);
   color: var(--ink-gray-9);
 }
+
+video, img {
+  @apply shadow-xl rounded;
+}
