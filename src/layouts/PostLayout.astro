@@ -12,6 +12,8 @@ type Props = {
 };
 
 const { release } = Astro.props;
+
+const formatDate = (x:string) => new Date(x).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
 ---
 
 <!doctype html>
@@ -23,15 +25,15 @@ const { release } = Astro.props;
 			image={release.data.image}
 		/>
 	</head><body>
-		<div >
-			<div class="version_wrapper">
-				<div class="version_info">
-					<div class="version_number">{release.data.versionNumber}</div>
-					<FormattedDate class="date" date={release.data.date} />
-				</div>
+    <Header/>
+		<div class='max-w-2xl mx-auto'>
+			<div class="rounded flex justify-between gap-1 my-10 bg-surface-gray-6 text-ink-gray-1 p-3 px-5">
+        <div>Version {release.data.versionNumber}</div>
+          <span>{formatDate(release.data.date)} </span>
 			</div>
+      <br/>
 
-			<div class="content max-w-3xl mx-auto prose">
+			<div class="content  prose  max-w-none">
 				<slot />
 			</div>
 		</div>
